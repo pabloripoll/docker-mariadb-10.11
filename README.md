@@ -89,17 +89,24 @@ $ make help
 usage: make [target]
 
 targets:
-Makefile  help                     shows this Makefile help message
-Makefile  hostname                 shows local machine ip
-Makefile  fix-permission           sets project directory permission
-Makefile  port-check               shows this project ports availability on local machine
-Makefile  database-ssh             enters the database container shell
-Makefile  database-set             sets the database enviroment file to build the container
-Makefile  database-build           builds the database container from Docker image
-Makefile  database-start           starts up the database container running
-Makefile  database-stop            stops the database container but data will not be destroyed
-Makefile  database-destroy         stops and removes the database container from Docker network destroying its data
-Makefile  repo-flush               clears local git repository cache specially to update .gitignore
+Makefile  help                   shows this Makefile help message
+Makefile  hostname               shows local machine hostname ip
+Makefile  fix-permission         sets project directory permission
+Makefile  port-check             shows .env port set availability on local machine
+Makefile  env                    checks if docker .env file exists
+Makefile  env-set                sets the database enviroment file to build the container
+Makefile  ssh                    enters the database container shell
+Makefile  build                  builds the database container from Docker image
+Makefile  dev                    -- recipe has not usage in this project --
+Makefile  up                     starts the containers in the background and leaves them running
+Makefile  start                  starts existing containers for a service
+Makefile  stop                   stops running container without removing it
+Makefile  clear                  stops and removes the database container from Docker network destroying its data
+Makefile  destroy                removes the database image from Docker - docker system and volume prune still required to be manually
+Makefile  sql-install            installs into container database the init sql file from resources/database
+Makefile  sql-replace            replaces container database with the latest sql backup file from resources/database
+Makefile  sql-backup             creates / replace a sql backup file from container database in resources/database
+Makefile  repo-flush             clears local git repository cache specially to update .gitignore
 ```
 
 Create a [DOTENV](.env) file from [.env.example](.env.example) and setup according to your project requirement the following variables

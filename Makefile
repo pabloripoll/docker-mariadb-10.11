@@ -92,7 +92,7 @@ up: ## starts the containers in the background and leaves them running
 start: ## starts existing containers for a service
 	cd docker && $(DOCKER_COMPOSE) start
 
-stop:: ## Stops running container without removing it
+stop: ## stops running container without removing it
 	cd docker && $(DOCKER_COMPOSE) stop
 
 clear: ## stops and removes the database container from Docker network destroying its data
