@@ -157,3 +157,24 @@ Containers      1         1         14.37kB   0B (0%)
 Local Volumes   2         1         260.9MB   130.5MB (50%)
 Build Cache     8         0         2.917kB   2.917kB
 ```
+
+## Configuration
+
+```
+# Leave it empty if no need for sudo user to execute docker commands
+DOCKER_USER=sudo
+
+# Container data for docker-compose.yml
+PROJECT_TITLE="MARIADB"                 # <- this name will prompt on makfile messages
+PROJECT_ABBR="mdb1"                     # <- this abbreviation will be part of the image tag but helpful if more maridb containers are running
+
+# Database container
+PROJECT_DB_HOST="127.0.0.1" <- this
+PROJECT_DB_PORT="8889"
+PROJECT_DB_CAAS="mariadb"
+PROJECT_DB_PATH="../../resources/database/"
+PROJECT_DB_ROOT="7c4a8d09ca3762af61e595209"
+PROJECT_DB_NAME="mariadb"
+PROJECT_DB_USER="mariadb"
+PROJECT_DB_PASS="123456"
+```

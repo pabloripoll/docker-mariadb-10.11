@@ -10,7 +10,7 @@ C_END='\033[0m'
 
 include .env
 
-DOCKER_TITLE="$(PROJECT_TITLE) DB"
+DOCKER_NAME="$(PROJECT_TITLE)"
 DOCKER_ABBR=$(PROJECT_ABBR)
 DOCKER_CAAS=$(PROJECT_DB_CAAS)
 DOCKER_HOST=$(PROJECT_DB_HOST)
@@ -35,18 +35,18 @@ help: ## shows this Makefile help message
 # -------------------------------------------------------------------------------------------------
 .PHONY: hostname fix-permission port-check
 
-hostname: ## shows local machine ip
+hostname: ## shows local machine hostname ip
 	echo $(word 1,$(shell hostname -I))
 
 fix-permission: ## sets project directory permission
 	$(DOCKER_USER) chown -R ${USER}: $(ROOT_DIR)/
 
-port-check: ## shows this project ports availability on local machine
-	echo "Checking configuration for "${C_YEL}"$(DOCKER_TITLE)"${C_END}" container:";
+port-check: ## shows .env port set availability on local machine
+	echo "Checking configuration for "${C_YEL}"$(DOCKER_NAME)"${C_END}" container:";
 	if [ -z "$$($(DOCKER_USER) lsof -i :$(DOCKER_PORT))" ]; then \
-		echo ${C_BLU}"$(DOCKER_TITLE)"${C_END}" > port:"${C_GRN}"$(DOCKER_PORT) is free to use."${C_END}; \
+		echo ${C_BLU}"$(DOCKER_NAME)"${C_END}" > port:"${C_GRN}"$(DOCKER_PORT) is free to use."${C_END}; \
     else \
-		echo ${C_BLU}"$(DOCKER_TITLE)"${C_END}" > port:"${C_RED}"$(DOCKER_PORT) is busy. Update ./.env file."${C_END}; \
+		echo ${C_BLU}"$(DOCKER_NAME)"${C_END}" > port:"${C_RED}"$(DOCKER_PORT) is busy. Update ./.env file."${C_END}; \
 	fi
 
 # -------------------------------------------------------------------------------------------------
@@ -56,9 +56,9 @@ port-check: ## shows this project ports availability on local machine
 
 env: ## checks if docker .env file exists
 	if [ -f ./docker/.env ]; then \
-		echo ${C_BLU}$(DOCKER_TITLE)${C_END}" docker-compose.yml .env file "${C_GRN}"is set."${C_END}; \
+		echo ${C_BLU}$(DOCKER_NAME)${C_END}" docker-compose.yml .env file "${C_GRN}"is set."${C_END}; \
     else \
-		echo ${C_BLU}$(DOCKER_TITLE)${C_END}" docker-compose.yml .env file "${C_RED}"is not set."${C_END}" \
+		echo ${C_BLU}$(DOCKER_NAME)${C_END}" docker-compose.yml .env file "${C_RED}"is not set."${C_END}" \
 	Create it by executing "${C_YEL}"$$ make env-set"${C_END}; \
 	fi
 
@@ -70,7 +70,7 @@ env-set: ## sets the database enviroment file to build the container
 	\nMYSQL_DATABASE=$(PROJECT_DB_NAME)\
 	\nMYSQL_USER=$(PROJECT_DB_USER)\
 	\nMYSQL_PASSWORD=\"$(PROJECT_DB_PASS)\""> ./docker/.env;
-	echo ${C_BLU}"$(DOCKER_TITLE)"${C_END}" docker-compose.yml .env file "${C_GRN}"has been set."${C_END};
+	echo ${C_BLU}"$(DOCKER_NAME)"${C_END}" docker-compose.yml .env file "${C_GRN}"has been set."${C_END};
 
 # -------------------------------------------------------------------------------------------------
 #  Container
@@ -89,14 +89,11 @@ dev:
 up: ## starts up the database container running
 	cd docker && $(DOCKER_COMPOSE) up -d
 
-first:
-	$(MAKE) build install up
-
 start:
-	$(MAKE) build up
+	cd docker && $(DOCKER_COMPOSE) start
 
-stop:: ## stops the database container but data won't be destroyed
-	cd docker && $(DOCKER_COMPOSE) down .v
+stop:: ## Stops running containers without removing them. They can be started again with docker compose start.
+	cd docker && $(DOCKER_COMPOSE) stop
 
 clear: ## stops and removes the database container from Docker network destroying its data
 	cd docker && $(DOCKER_COMPOSE) kill || true
@@ -105,6 +102,9 @@ clear: ## stops and removes the database container from Docker network destroyin
 
 destroy:
 	cd docker && $(DOCKER_USER) docker rmi $(DOCKER_CAAS):$(DOCKER_ABBR)-mariadb
+
+first:
+	$(MAKE) build up
 
 restart:
 	$(MAKE) stop start
