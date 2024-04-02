@@ -122,6 +122,13 @@ PROJECT_DB_USER="mariadb"                   # <- database name
 PROJECT_DB_PASS="123456"                    # <- database user password
 ```
 
+Exacute the following command to create the [docker/.env](docker/.env) file, required for building the container-
+```bash
+$ make env-set
+
+MARIADB docker-compose.yml .env file has been set.
+```
+
 Checkout local machine ports availability
 ```bash
 $ make port-check
@@ -130,14 +137,19 @@ Checking configuration for MARIADB container:
 MARIADB > port:8880 is free to use.
 ```
 
+Build the container
+```bash
+$ make build
+```
+
+**Before connectingto this service** checkout database connection health using a database mysql client.
+
 Checkout local machine IP to set connection between containers using the following makefile recipe
 ```bash
 $ make hostname
 
 192.168.1.41
 ```
-
-**Before running this service** checkout database connection health using a database mysql client.
 
 - [MySQL Workbench](https://www.mysql.com/products/workbench/)
 - [DBeaver](https://dbeaver.io/)
