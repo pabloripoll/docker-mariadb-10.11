@@ -102,7 +102,7 @@ Makefile  database-destroy         stops and removes the database container from
 Makefile  repo-flush               clears local git repository cache specially to update .gitignore
 ```
 
-Create a [DOTENV](.env) file from [.env.example](.env.example) and set the following variables
+Create a [DOTENV](.env) file from [.env.example](.env.example) and setup according to your project requirement the following variables
 ```
 # Leave it empty if no need for sudo user to execute docker commands
 DOCKER_USER=sudo
