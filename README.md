@@ -80,7 +80,7 @@ Directories and main files on a tree architecture description
 
 Makefiles are often used to automate the process of building and compiling software on Unix-based systems as Linux and macOS.
 
-*On Windows - I recommend to use Makefile: \
+*To use Makefile on Windows I recommend to follow this post: \
 https://stackoverflow.com/questions/2532234/how-to-run-a-makefile-in-windows*
 
 Makefile recipies
@@ -92,7 +92,7 @@ targets:
 Makefile  help                     shows this Makefile help message
 Makefile  hostname                 shows local machine ip
 Makefile  fix-permission           sets project directory permission
-Makefile  ports-check              shows this project ports availability on local machine
+Makefile  port-check               shows this project ports availability on local machine
 Makefile  database-ssh             enters the database container shell
 Makefile  database-set             sets the database enviroment file to build the container
 Makefile  database-build           builds the database container from Docker image
@@ -102,12 +102,32 @@ Makefile  database-destroy         stops and removes the database container from
 Makefile  repo-flush               clears local git repository cache specially to update .gitignore
 ```
 
+Create a [.env](DOTENV) file from example a set the following variables
+```
+# Leave it empty if no need for sudo user to execute docker commands
+DOCKER_USER=sudo
+
+# Container data for docker-compose.yml
+PROJECT_TITLE="MARIADB"   # <- this name will prompt on makfile messages
+PROJECT_ABBR="mdb1"       # <- part of the image tag, useful if more maridb are running
+
+# Database container
+PROJECT_DB_HOST="127.0.0.1"                 # <- for this project is not necessary
+PROJECT_DB_PORT="8889"                      # <- port to connect to mariadb
+PROJECT_DB_CAAS="mariadb"                   # <- container as a service name
+PROJECT_DB_PATH="../resources/database/"    # <- path location for database backup or copy
+PROJECT_DB_ROOT="7c4a8d09ca3762af61e595"    # <- database root password
+PROJECT_DB_NAME="mariadb"                   # <- database user
+PROJECT_DB_USER="mariadb"                   # <- database name
+PROJECT_DB_PASS="123456"                    # <- database user password
+```
+
 Checkout local machine ports availability
 ```bash
-$ make ports-check
+$ make port-check
 
 Checking configuration for MARIADB container:
-MARIADB > port:8888 is free to use.
+MARIADB > port:8880 is free to use.
 ```
 
 Checkout local machine IP to set connection between containers using the following makefile recipe
@@ -156,25 +176,4 @@ Images          1         1         284.2MB   0B (0%)
 Containers      1         1         14.37kB   0B (0%)
 Local Volumes   2         1         260.9MB   130.5MB (50%)
 Build Cache     8         0         2.917kB   2.917kB
-```
-
-## Configuration
-
-```
-# Leave it empty if no need for sudo user to execute docker commands
-DOCKER_USER=sudo
-
-# Container data for docker-compose.yml
-PROJECT_TITLE="MARIADB"   # <- this name will prompt on makfile messages
-PROJECT_ABBR="mdb1"       # <- part of the image tag, useful if more maridb are running
-
-# Database container
-PROJECT_DB_HOST="127.0.0.1"                 # <- for this project is not necessary
-PROJECT_DB_PORT="8889"                      # <- port to connect to mariadb
-PROJECT_DB_CAAS="mariadb"                   # <- container as a service name
-PROJECT_DB_PATH="../resources/database/"    # <- path location for database backup or copy
-PROJECT_DB_ROOT="7c4a8d09ca3762af61e595"    # <- database root password
-PROJECT_DB_NAME="mariadb"                   # <- database user
-PROJECT_DB_USER="mariadb"                   # <- database name
-PROJECT_DB_PASS="123456"                    # <- database user password
 ```
