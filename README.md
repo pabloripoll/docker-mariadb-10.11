@@ -137,12 +137,12 @@ Checking configuration for MARIADB container:
 MARIADB > port:8880 is free to use.
 ```
 
-Build the container
+Build the container and start using it
 ```bash
-$ make build
+$ make build up
 ```
 
-**Before connectingto this service** checkout database connection health using a database mysql client.
+**Before connecting to this service** checkout database connection health using a database mysql client.
 
 Checkout local machine IP to set connection between containers using the following makefile recipe
 ```bash
