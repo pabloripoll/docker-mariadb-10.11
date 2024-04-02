@@ -147,6 +147,25 @@ MARIADB > port:8880 is free to use.
 Build the container and start using it
 ```bash
 $ make build up
+
+[+] Building 10.1s (10/10) FINISHED                                                                                                                                                 docker:default
+ => [mariadb internal] load build definition from Dockerfile                              0.0s
+ => => transferring dockerfile: 1.13kB                                                    0.0s
+ => [mariadb] resolve image config for docker-image://docker.io/docker/dockerfile:1       1.0s
+ => CACHED [mariadb] docker-image://docker.io/docker/dockerfile:1@sha256:ac85f380a63...   0.0s
+ => [mariadb internal] load metadata for ghcr.io/linuxserver/baseimage-alpine:3.19        1.5s
+ => [mariadb internal] load .dockerignore                                                 0.0s
+ => => transferring context: 107B                                                         0.0s
+ => [mariadb 1/3] FROM ghcr.io/linuxserver/baseimage-alpine:3.19@sh
+...
+ => => exporting layers                                                                   1.4s
+ => => writing image sha256:375ffb756af0fe6e33d1d091b883fa840e21d0c1e32e029a9b03817...    0.0s
+ => => naming to docker.io/library/mariadb:mdb1-mariadb                                   0.0s
+[+] Running 1/2
+ ⠧ Network mariadb_default  Created                                                       0.8s
+ ✔ Container mariadb        Started                                                       0.6s
+[+] Running 1/0
+ ✔ Container mariadb  Running
 ```
 
 **Before connecting to this service** checkout database connection health using a database mysql client.
@@ -183,16 +202,54 @@ BUG_REPORT_URL="https://gitlab.alpinelinux.org/alpine/aports/-/issues"
 ```bash
 $ sudo docker ps
 CONTAINER ID   IMAGE                   COMMAND      CREATED              STATUS           PORTS                     NAMES
-85cc9f74b6be   mariadb:mariadb-10.11   "/scri..."   About a minute ago   Up About a ...   0.0.0.0:8899->3306/t...   mariadb
+85cc9f74b6be   mariadb:mariadb-10.11   "/scri..."   About a minute ago   Up About a ...   0.0.0.0:8880->3306/t...   mariadb
+```
 
+```bash
 $ sudo docker images
 REPOSITORY   TAG       IMAGE ID       CREATED              SIZE
-mariadb      10.11     d4d593f6b82e   About a minute ago   284MB
+mariadb      10.11     d4d593f6b82e   About a minute ago   333MB
+```
 
+```bash
 $ sudo docker system df
 TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
-Images          1         1         284.2MB   0B (0%)
-Containers      1         1         14.37kB   0B (0%)
-Local Volumes   2         1         260.9MB   130.5MB (50%)
-Build Cache     8         0         2.917kB   2.917kB
+Images          1         1         332.7MB   0B (0%)
+Containers      1         1         25.09kB   0B (0%)
+Local Volumes   2         1         248.4MB   117.9MB (50%)
+Build Cache     8         0         12.92kB   12.92kB
+```
+
+```bash
+$ sudo docker system prune
+WARNING! This will remove:
+  - all stopped containers
+  - all networks not used by at least one container
+  - all dangling images
+  - unused build cache
+
+Are you sure you want to continue? [y/N] y
+Deleted build cache objects:
+pi2nekd11s31r4s76flw3ju1f
+rjcjdgy9k0trjhvgrq6uol7w3
+1f3e2fchph8p0u1nc1h3rdj3u
+wk5uspgwehxu1f2cf3yzd825q
+l88kfpqdw00qdab64yj3z1zi4
+g03h439y1od9xdgyu4bq8yxgv
+4cgf7g6rrujewzb0m4xcdhaw0
+cj3n87r5jj9trj3aypditdriu
+7645felv5gllm8wnzis4f8fq9
+sehrl0x8avgtjfyfn17jsodtk
+
+Total reclaimed space: 306.9MB
+```
+
+```bash
+$ sudo docker volume prune
+WARNING! This will remove anonymous local volumes not used by at least one container.
+Are you sure you want to continue? [y/N] y
+Deleted Volumes:
+8ad2974b68ae451f49224d95b066a0f9aa697d9965dfe0e6cf82d1c191e7f34d
+
+Total reclaimed space: 117.9MB
 ```
