@@ -165,16 +165,16 @@ Build Cache     8         0         2.917kB   2.917kB
 DOCKER_USER=sudo
 
 # Container data for docker-compose.yml
-PROJECT_TITLE="MARIADB"                 # <- this name will prompt on makfile messages
-PROJECT_ABBR="mdb1"                     # <- this abbreviation will be part of the image tag but helpful if more maridb containers are running
+PROJECT_TITLE="MARIADB"   # <- this name will prompt on makfile messages
+PROJECT_ABBR="mdb1"       # <- abbreviated / tag - part of the image tag and helpful if more maridb containers are running
 
 # Database container
-PROJECT_DB_HOST="127.0.0.1" <- this
-PROJECT_DB_PORT="8889"
-PROJECT_DB_CAAS="mariadb"
-PROJECT_DB_PATH="../../resources/database/"
-PROJECT_DB_ROOT="7c4a8d09ca3762af61e595209"
-PROJECT_DB_NAME="mariadb"
-PROJECT_DB_USER="mariadb"
-PROJECT_DB_PASS="123456"
+PROJECT_DB_HOST="127.0.0.1"                 # <- for this project is not neccessary
+PROJECT_DB_PORT="8889"                      # <- port to connect to mariadb
+PROJECT_DB_CAAS="mariadb"                   # <- container as a service name
+PROJECT_DB_PATH="../resources/database/"    # <- path location for database backup or copy
+PROJECT_DB_ROOT="7c4a8d09ca3762af61e595"    # <- database root password
+PROJECT_DB_NAME="mariadb"                   # <- database user
+PROJECT_DB_USER="mariadb"                   # <- database name
+PROJECT_DB_PASS="123456"                    # <- database user password
 ```
