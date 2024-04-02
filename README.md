@@ -166,10 +166,10 @@ DOCKER_USER=sudo
 
 # Container data for docker-compose.yml
 PROJECT_TITLE="MARIADB"   # <- this name will prompt on makfile messages
-PROJECT_ABBR="mdb1"       # <- abbreviated / tag - part of the image tag and helpful if more maridb containers are running
+PROJECT_ABBR="mdb1"       # <- part of the image tag, useful if more maridb are running
 
 # Database container
-PROJECT_DB_HOST="127.0.0.1"                 # <- for this project is not neccessary
+PROJECT_DB_HOST="127.0.0.1"                 # <- for this project is not necessary
 PROJECT_DB_PORT="8889"                      # <- port to connect to mariadb
 PROJECT_DB_CAAS="mariadb"                   # <- container as a service name
 PROJECT_DB_PATH="../resources/database/"    # <- path location for database backup or copy
