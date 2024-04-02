@@ -17,6 +17,7 @@ lerna-debug.log*
 *.njsproj
 *.sln
 *.sw?
+.gitignore
 .env
 vendor
 node_modules
