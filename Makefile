@@ -83,16 +83,16 @@ ssh: ## enters the database container shell
 build: ## builds the database container from Docker image
 	cd docker && $(DOCKER_COMPOSE) up --build --no-recreate -d
 
-dev:
+dev: ## -- recipe has not usage in this project --
 	echo ${C_YEL}"\"dev\" recipe has not usage in this project"${C_END};
 
-up: ## starts up the database container running
+up: ## starts the containers in the background and leaves them running
 	cd docker && $(DOCKER_COMPOSE) up -d
 
-start:
+start: ## starts existing containers for a service
 	cd docker && $(DOCKER_COMPOSE) start
 
-stop:: ## Stops running containers without removing them. They can be started again with docker compose start.
+stop:: ## Stops running container without removing it
 	cd docker && $(DOCKER_COMPOSE) stop
 
 clear: ## stops and removes the database container from Docker network destroying its data
@@ -100,7 +100,7 @@ clear: ## stops and removes the database container from Docker network destroyin
 	cd docker && $(DOCKER_COMPOSE) rm --force || true
 	cd docker && $(DOCKER_COMPOSE) down -v --remove-orphans || true
 
-destroy:
+destroy: ## removes the database image from Docker - docker system and volume prune still required to be manually
 	cd docker && $(DOCKER_USER) docker rmi $(DOCKER_CAAS):$(DOCKER_ABBR)-mariadb
 
 first:
@@ -117,13 +117,13 @@ rebuild:
 # -------------------------------------------------------------------------------------------------
 .PHONY: sql-install sql-replace sql-backup
 
-sql-install: ## clears local git repository cache specially to update .gitignore
+sql-install: ## installs into container database the init sql file from resources/database
 	sudo docker exec -i $(PROJECT_DB_CAAS) sh -c 'exec mysql $(PROJECT_DB_NAME) -uroot -p"$(PROJECT_DB_ROOT)"' < $(PROJECT_DB_PATH)/$(PROJECT_DB_NAME)-init.sql
 
-sql-replace: ## clears local git repository cache specially to update .gitignore
+sql-replace: ## replaces container database with the latest sql backup file from resources/database
 	sudo docker exec -i $(PROJECT_DB_CAAS) sh -c 'exec mysql $(PROJECT_DB_NAME) -uroot -p"$(PROJECT_DB_ROOT)"' < $(PROJECT_DB_PATH)/$(PROJECT_DB_NAME)-backup.sql
 
-sql-backup: ## clears local git repository cache specially to update .gitignore
+sql-backup: ## creates / replace a sql backup file from container database in resources/database
 	sudo docker exec $(PROJECT_DB_CAAS) sh -c 'exec mysqldump $(PROJECT_DB_NAME) -uroot -p"$(PROJECT_DB_ROOT)"' > $(PROJECT_DB_PATH)/$(PROJECT_DB_NAME)-backup.sql
 
 # -------------------------------------------------------------------------------------------------
