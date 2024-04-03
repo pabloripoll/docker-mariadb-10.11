@@ -115,14 +115,14 @@ Create a [DOTENV](.env) file from [.env.example](.env.example) and setup accordi
 DOCKER_USER=sudo
 
 # Container data for docker-compose.yml
-PROJECT_TITLE="MARIADB"   # <- this name will prompt on makfile messages
-PROJECT_ABBR="mdb1"       # <- part of the image tag, useful if more maridb are running
+PROJECT_TITLE="MARIADB"   # <- this name will be prompt for Makefile recipes
+PROJECT_ABBR="mdb1"       # <- part of the service image tag - useful if similar services are running
 
 # Database container
 PROJECT_DB_HOST="127.0.0.1"                 # <- for this project is not necessary
-PROJECT_DB_PORT="8889"                      # <- port to connect to mariadb
-PROJECT_DB_CAAS="mariadb"                   # <- container as a service name
-PROJECT_DB_PATH="../resources/database/"    # <- path location for database backup or copy
+PROJECT_DB_PORT="8889"                      # <- port access container service on local machine
+PROJECT_DB_CAAS="mariadb"                   # <- container as a service name to build service
+PROJECT_DB_PATH="../resources/database/"    # <- path where database backup or copy resides
 PROJECT_DB_ROOT="7c4a8d09ca3762af61e595"    # <- database root password
 PROJECT_DB_NAME="mariadb"                   # <- database user
 PROJECT_DB_USER="mariadb"                   # <- database name
