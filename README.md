@@ -23,8 +23,9 @@ The connection with this container service is as [Host Network](https://docs.doc
 * Built on the lightweight and secure Alpine 3.19 [2024 release](https://www.alpinelinux.org/posts/Alpine-3.19.1-released.html) Linux distribution
 * Multi-platform, supporting AMD4, ARMv6, ARMv7, ARM64
 * Very small Docker image size (+/-280MB)
-* Uses MariaDB 10.11 as default for the best performance, low CPU usage & memory footprint.
+* Uses MariaDB 10.11 as default for the best performance, low CPU usage & memory footprint
 * Services independency to connect from container application to this database allocation
+* Useful setting to run in a cluster
 
 ## Usage
 Local machien apps can connect to this service by address `localhost:${PORT}` but to connect other containers to this service, the address is `${HOSTNAME}:${PORT}`.
@@ -116,7 +117,7 @@ DOCKER_USER=sudo
 
 # Container data for docker-compose.yml
 PROJECT_TITLE="MARIADB"   # <- this name will be prompt for Makefile recipes
-PROJECT_ABBR="mdb1"       # <- part of the service image tag - useful if similar services are running
+PROJECT_ABBR="mdb1"       # <- part of the service image tag - useful inside a cluster
 
 # Database container
 PROJECT_DB_HOST="127.0.0.1"                 # <- for this project is not necessary
