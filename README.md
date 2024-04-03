@@ -6,9 +6,9 @@
 
 # Docker - MariaDB 10.11
 
-The objective of this repository is having a CaaS [Containers as a Service](https://www.ibm.com/topics/containers-as-a-service) repository to provide a start up database for local development and follow the best practices on a [cloud database](https://cloud.google.com/learn/what-is-a-cloud-database) scenario, to understand and modify by development requirements.
+The objective of this repository is having a CaaS [Containers as a Service](https://www.ibm.com/topics/containers-as-a-service) to provide a "ready to use" container with the basic enviroment features to deploy a [MariaDB](https://mariadb.org/) database service under a lightweight Linux image for development stage requirements.
 
-The connection with this container service is as [Host Network](https://docs.docker.com/network/drivers/host/) on `eth0`, thus this container do not share networking or bridge configuration.
+The container configuration is as [Host Network](https://docs.docker.com/network/drivers/host/) on `eth0` as [Bridge network](https://docs.docker.com/network/drivers/bridge/), thus it can be accessed through `localhost:${PORT}` by browsers but to connect with it or this with other services `${HOSTNAME}:${PORT}` will be required.
 
 ### Stack Details
 
@@ -24,8 +24,8 @@ The connection with this container service is as [Host Network](https://docs.doc
 * Multi-platform, supporting AMD4, ARMv6, ARMv7, ARM64
 * Very small Docker image size (+/-280MB)
 * Uses MariaDB 10.11 as default for the best performance, low CPU usage & memory footprint
-* Services independency to connect from container application to this database allocation
-* Useful setting to run in a cluster
+* Service independency to connect from other container application to this database allocation
+* Useful setting to run this service inside a cluster configuration
 
 ## Usage
 Local machien apps can connect to this service by address `localhost:${PORT}` but to connect other containers to this service, the address is `${HOSTNAME}:${PORT}`.
