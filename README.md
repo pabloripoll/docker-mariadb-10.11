@@ -180,9 +180,9 @@ $ make hostname
 - [HeidiSQL](https://www.heidisql.com/)
 - Or whatever you like. This Docker project doesn't come with [PhpMyAdmin](https://www.phpmyadmin.net/) to make it lighter.
 
-
 ## Docker Info
 
+MariaDB service information inside container
 ```bash
 $ mariadb --version
 mariadb  Ver 15.1 Distrib 10.11.6-MariaDB, for Linux (x86_64) using readline 5.1
@@ -197,18 +197,21 @@ HOME_URL="https://alpinelinux.org/"
 BUG_REPORT_URL="https://gitlab.alpinelinux.org/alpine/aports/-/issues"
 ```
 
+Running container on Docker
 ```bash
 $ sudo docker ps
 CONTAINER ID   IMAGE                   COMMAND      CREATED              STATUS           PORTS                     NAMES
 85cc9f74b6be   mariadb:mariadb-10.11   "/scri..."   About a minute ago   Up About a ...   0.0.0.0:8880->3306/t...   mariadb
 ```
 
+Docker image size
 ```bash
 $ sudo docker images
 REPOSITORY   TAG       IMAGE ID       CREATED              SIZE
 mariadb      10.11     d4d593f6b82e   About a minute ago   333MB
 ```
 
+Stats regarding the amount of disk space used by the container
 ```bash
 $ sudo docker system df
 TYPE            TOTAL     ACTIVE    SIZE      RECLAIMABLE
@@ -218,6 +221,7 @@ Local Volumes   2         1         248.4MB   117.9MB (50%)
 Build Cache     8         0         12.92kB   12.92kB
 ```
 
+Information on pruning Docker system cache
 ```bash
 $ sudo docker system prune
 WARNING! This will remove:
@@ -242,6 +246,7 @@ sehrl0x8avgtjfyfn17jsodtk
 Total reclaimed space: 306.9MB
 ```
 
+Information on pruning Docker volume cache
 ```bash
 $ sudo docker volume prune
 WARNING! This will remove anonymous local volumes not used by at least one container.
