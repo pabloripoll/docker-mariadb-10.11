@@ -129,7 +129,7 @@ PROJECT_DB_USER="mariadb"                   # <- database name
 PROJECT_DB_PASS="123456"                    # <- database user password
 ```
 
-Exacute the following command to create the [docker/.env](docker/.env) file, required for building the container-
+Exacute the following command to create the [docker/.env](docker/.env) file, required for building the container
 ```bash
 $ make env-set
 
