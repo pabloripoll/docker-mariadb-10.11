@@ -253,3 +253,26 @@ Deleted Volumes:
 
 Total reclaimed space: 117.9MB
 ```
+
+## Stop Container Service
+
+Using the following Makefile recipe stops application from running, keeping database persistance and application files binded without any loss
+```bash
+$ make mariadb-stop
+[+] Stopping 1/1
+ ✔ Container mariadb-app  Stopped                                                     0.5s
+```
+
+## Remove Container Image
+
+To remove application container from Docker network use the following Makefile recipe *(Docker prune commands still needed to be applied manually)*
+```bash
+$ make mariadb-destroy
+
+[+] Removing 1/0
+ ✔ Container mariadb-app  Removed                                                     0.0s
+[+] Running 1/1
+ ✔ Network mariadb-app_default  Removed                                               0.4s
+Untagged: mariadb:mdb1-mariadb
+Deleted: sha256:3c99f91a63edd857a0eaa13503c00d500fad57cf5e29ce1da3210765259c35b1
+```
