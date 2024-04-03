@@ -18,7 +18,7 @@ The container configuration is as [Host Network](https://docs.docker.com/network
 
 - [MariaDB Package](https://alpine.pkgs.org/3.19/alpine-main-x86_64/mariadb-10.11.6-r0.apk.html)
 
-### Objetives
+### Project objetives with Docker
 
 * Built on the lightweight and secure Alpine 3.19 [2024 release](https://www.alpinelinux.org/posts/Alpine-3.19.1-released.html) Linux distribution
 * Multi-platform, supporting AMD4, ARMv6, ARMv7, ARM64
@@ -26,9 +26,6 @@ The container configuration is as [Host Network](https://docs.docker.com/network
 * Uses MariaDB 10.11 as default for the best performance, low CPU usage & memory footprint
 * Service independency to connect from other container application to this database allocation
 * Useful setting to run this service inside a cluster configuration
-
-## Usage
-Local machien apps can connect to this service by address `localhost:${PORT}` but to connect other containers to this service, the address is `${HOSTNAME}:${PORT}`.
 
 #### Hostname on Windows systems
 
