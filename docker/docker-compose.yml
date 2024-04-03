@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   mariadb:
     image: ${COMPOSE_PROJECT_NAME}:${COMPOSE_PROJECT_ABBR}-mariadb
